@@ -1,5 +1,5 @@
 FILE = main.cc
-OUT = winter
+OUT = winter.o
 
 mac: $(FILE)
 	g++ -o $(OUT) $(FILE) -I/opt/local/include -L/opt/local/lib -framework OpenGL -framework GLUT -lGLEW
