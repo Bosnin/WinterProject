@@ -7,13 +7,14 @@
 #endif
 void display();
 void reshape(int width, int height);
+void renderTri();
 
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE);
 	glutInitWindowSize(500, 500);
-	glutInitWindowPosition(100, 100);
+	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Winter Project");
 
 	glutDisplayFunc(display);
@@ -27,7 +28,11 @@ void display()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
-	
+	glPushMatrix();
+	glTranslatef(0.0f, 0.0f, -2.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	renderTri();	
+	glPopMatrix();	
 	glFlush();
 }
 
@@ -38,4 +43,15 @@ void reshape(int width, int height)
 	glLoadIdentity();
 	gluPerspective(60, (GLfloat)width / (GLfloat)height, 1.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void renderTri()
+{
+	glBegin(GL_TRIANGLES);
+	
+	glVertex3f(0.5f, -0.5f, 0.0f);
+	glVertex3f(-0.5f, -0.5f, 0.0f);
+	glVertex3f(0.0f, 0.5f, 0.0f);
+
+	glEnd();
 }
