@@ -6,3 +6,6 @@ mac: $(FILE)
 
 linux: $(FILE)
 	g++ -o $(OUT) $(FILE) -I/usr/X11R6/include -L/usr/X11R6/lib -lGL -lGLEW -lglut
+
+item.o: item.h item.cc
+	g++ -c item.cc
