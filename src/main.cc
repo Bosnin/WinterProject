@@ -1,3 +1,4 @@
+#include"model.h"
 #include<GL/glew.h>
 
 #ifdef __APPLE__
@@ -5,12 +6,14 @@
 #else
 #	include <GL/glut.h>
 #endif
+
 void display();
 void reshape(int width, int height);
 void renderTri();
 
 int main(int argc, char** argv)
 {
+	Model mdl;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE);
 	glutInitWindowSize(500, 500);

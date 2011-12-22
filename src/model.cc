@@ -8,10 +8,12 @@ Model::Model()
 	hasNorm = false;
 }
 
+
 void Model::setVerts(vector<vector<float> > set)
 {
 	verts = set;
 }
+
 
 void Model::setNorms(vector<vector<float> > set)
 {
@@ -23,17 +25,18 @@ void Model::setTex(vector<vector<float> > set)
 	tex = set;
 }
 
-vector<vector<float> > getVerts()
+vector<vector<float> > Model::getVerts()
 {
 	return verts;
-{
+}
 
-vector<vector<float> > getNorms()
+vector<vector<float> > Model::getNorms()
 {
 	return verts;
-{
+}
 
-vector<vector<float> > getTex()
+vector<vector<float> > Model::getTex()
 {
 	return verts;
-{
+}
+
