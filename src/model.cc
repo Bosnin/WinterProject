@@ -6,6 +6,9 @@ Model::Model()
 {
 	hasTex = false;
 	hasNorm = false;
+	x = 0.0f;
+	y = 0.0f;
+	z = 0.0f;
 }
 
 
@@ -25,6 +28,11 @@ void Model::setTex(vector<vector<float> > set)
 	tex = set;
 }
 
+void Model::setFaces(vector<vector<int> > set)
+{
+	faces = set;
+}
+
 vector<vector<float> > Model::getVerts()
 {
 	return verts;
@@ -40,3 +48,7 @@ vector<vector<float> > Model::getTex()
 	return verts;
 }
 
+vector<vector<int> > Model::getFaces()
+{
+	return faces;
+}
