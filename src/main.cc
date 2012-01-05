@@ -17,18 +17,28 @@
 
 using namespace std;
 
+//Prototypes
 void display();
 void reshape(int width, int height);
 void renderTri();
 void renderTest();
 void init();
+void keyUp(unsigned char key, int x, int y);
+void keyPressed(unsigned char key, int x, int y);
+void keyOperations();
 Model loadTest();
 Model mdl;
+
+//Globals
+GLfloat angle = 0.0f;
+bool* keyStates = new bool[256];
 
 int main(int argc, char** argv)
 {	
 	mdl = loadTest();
 	mdl.z = -3.0f;
+	for(size_t i = 0; i < 256; i++)
+		keyStates[i] = false;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_DEPTH);
 	glutInitWindowSize(800, 600);
@@ -38,9 +48,31 @@ int main(int argc, char** argv)
 	init();
 
 	glutDisplayFunc(display);
+	glutIdleFunc(display);
 	glutReshapeFunc(reshape);
 	
+	glutKeyboardFunc(keyPressed);
+	glutKeyboardUpFunc(keyUp);
+
 	glutMainLoop();
+}
+
+void keyUp(unsigned char key, int x, int y)
+{
+	keyStates[key] = false;
+}
+
+void keyPressed(unsigned char key, int x, int y)
+{
+	keyStates[key] = true;
+}
+
+void keyOperations()
+{
+	if(keyStates[GLUT_KEY_LEFT])
+		angle -= 5.0f;
+	if(keyStates[GLUT_KEY_RIGHT])
+		angle += 5.0f;
 }
 
 void init()
@@ -96,12 +128,13 @@ Model loadTest()
 
 void display()
 {
+	keyOperations();
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	glPushMatrix();
 	//TEST	
-	glColor3f(1, 1, 1);
 	renderTest();
 	glPopMatrix();	
 	glFlush();
@@ -112,18 +145,16 @@ void renderTest()
 	vector<vector<GLfloat> > verts = mdl.getVerts();
 	vector<vector<int> > faces = mdl.getFaces();
 	glTranslatef(mdl.x, mdl.y, mdl.z);
+	glRotatef(angle, 0, 1, 0);
 	GLfloat colors[3][3] = {{1.0f, 0.0f, 0.0f},
 							{0.0f, 1.0f, 0.0f},
 							{0.0f, 0.0f, 1.0f}};
 	for(int i = 0; i < faces.size(); i++)
 	{
-		cout << "Face: " << i;
 		glBegin(GL_QUADS);
 		for(int j = 0; j < faces[i].size(); j++)
 		{
 			int vert = faces[i][j] - 1;
-			cout << " vert num: " << vert << "\n";
-			cout << "x " << verts[vert][0] << " y " << verts[vert][1] << " z " << verts[vert][2] << "\n";;
 			int c = vert % 3;
 			glColor3f(colors[c][0], colors[c][1], colors[c][2]);	
 			glVertex3f(verts[vert][0],
