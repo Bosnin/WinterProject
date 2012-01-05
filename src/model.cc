@@ -12,18 +12,18 @@ Model::Model()
 }
 
 
-void Model::setVerts(vector<vector<float> > set)
+void Model::setVerts(vector<vector<GLfloat> > set)
 {
 	verts = set;
 }
 
 
-void Model::setNorms(vector<vector<float> > set)
+void Model::setNorms(vector<vector<GLfloat> > set)
 {
 	norms = set;
 }
 
-void Model::setTex(vector<vector<float> > set)
+void Model::setTex(vector<vector<GLfloat> > set)
 {
 	tex = set;
 }
@@ -33,17 +33,17 @@ void Model::setFaces(vector<vector<int> > set)
 	faces = set;
 }
 
-vector<vector<float> > Model::getVerts()
+vector<vector<GLfloat> > Model::getVerts()
 {
 	return verts;
 }
 
-vector<vector<float> > Model::getNorms()
+vector<vector<GLfloat> > Model::getNorms()
 {
 	return verts;
 }
 
-vector<vector<float> > Model::getTex()
+vector<vector<GLfloat> > Model::getTex()
 {
 	return verts;
 }
